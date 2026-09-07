@@ -1,0 +1,21 @@
+packages:
+  - 'packages/*'
+
+strictDepBuilds: true
+
+catalog:
+  typescript: '^6.0.3'
+  zod: '^4.4.3'
+  '@types/node': '^25.9.1'
+  tsup: '^8.5.1'
+  tsx: '^4.22.4'
+
+catalogs:
+  linting:
+    eslint: '^10.4.1'
+    prettier: '^3.8.3'
+  testing:
+    vitest: '^3.2.6' # was 4.1.8 - v4 needs Vite ≥6, which VitePress 1.x can't provide
+
+allowBuilds:
+  unrs-resolver: true

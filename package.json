@@ -1,0 +1,32 @@
+{
+  "name": "@lagetech/tooling",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "",
+  "keywords": [],
+  "author": {
+    "name": "Liam Lage",
+    "email": "liam@lagetech.io"
+  },
+  "license": "UNLICENSED",
+  "packageManager": "pnpm@11.6.0",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "prepare": "git config --local include.path ../.gitconfig || true",
+    "preinstall": "npx only-allow pnpm",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "typecheck:watch": "turbo run typecheck:watch",
+    "verify": "turbo run lint typecheck build --affected --output-logs=new-only",
+    "verify:all": "turbo run lint typecheck build --continue"
+  },
+  "devDependencies": {
+    "@lagetech/ts-config": "workspace:*",
+    "turbo": "^2.9.18",
+    "typescript": "catalog:"
+  }
+}
