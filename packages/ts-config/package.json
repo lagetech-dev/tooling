@@ -1,0 +1,20 @@
+{
+  "name": "@lagetech/ts-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "files": [
+    "tsconfig.base.json",
+    "tsconfig.node.json"
+  ],
+  "exports": {
+    "./tsconfig.base.json": {
+      "import": "./tsconfig.base.json",
+      "require": "./tsconfig.base.json"
+    },
+    "./tsconfig.node.json": {
+      "import": "./tsconfig.node.json",
+      "require": "./tsconfig.node.json"
+    }
+  }
+}
