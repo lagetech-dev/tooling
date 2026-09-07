@@ -1,0 +1,40 @@
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  # Base ref for `turbo run --affected` (compares TURBO_SCM_BASE...HEAD).
+  # PR: the base branch; push: the previous tip; dispatch: origin/main.
+  # HEAD (the comparison head) defaults correctly in all three triggers.
+  TURBO_SCM_BASE: ${{ github.base_ref && format('origin/{0}', github.base_ref) || github.event.before || 'origin/main' }}
+  TURBO_TELEMETRY_DISABLED: 1
+
+jobs:
+  lint-typecheck:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    name: lint & typecheck
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - run: pnpm exec turbo run lint typecheck --affected
+  ci-gate:
+    if: always()
+    needs: [lint-typecheck]
+    runs-on: ubuntu-latest
+    steps:
+      - if: contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')
+        run: exit 1

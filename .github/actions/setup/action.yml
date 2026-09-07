@@ -1,0 +1,20 @@
+name: Setup Node + pnpm + Turbo cache
+description: Installs pnpm, Node (version from .nvmrc), dependencies, and Turbo local cache
+runs:
+  using: composite
+  steps:
+    - name: Setup pnpm
+      uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+    - name: Setup Node.js environment
+      uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+      with:
+        node-version-file: .nvmrc
+        cache: pnpm
+    - run: pnpm install --frozen-lockfile
+      shell: bash
+    - name: Cache
+      uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
+      with:
+        path: .turbo
+        key: ${{ runner.os }}-turbo-${{ github.job }}-${{ github.sha }}
+        restore-keys: ${{ runner.os }}-turbo-${{ github.job }}-
