@@ -1,0 +1,4 @@
+#!/bin/sh
+# Runs pnpm verify before push.
+# Bypass: git push --no-verify
+pnpm verify

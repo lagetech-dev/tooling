@@ -1,0 +1,5 @@
+[core]
+	hooksPath = scripts/hooks
+
+[blame]
+	ignoreRevsFile = ./.git-blame-ignore-revs
