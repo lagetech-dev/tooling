@@ -60,7 +60,7 @@ is either unlinted or produces a parser error, not a silently weaker check.
 Not published to a registry. Pin to a released tag of this repo instead:
 
 ```sh
-pnpm add -D "github:lagetech-dev/tooling#packages/eslint-config-v0.1.0&path:/packages/eslint-config"
+pnpm add -D "github:lagetech-dev/tooling#eslint-config-v1.0.0&path:/packages/eslint-config"
 ```
 
 See [releases](https://github.com/lagetech-dev/tooling/releases) for available tags.
