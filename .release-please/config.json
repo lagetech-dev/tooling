@@ -46,6 +46,11 @@
       "type": "ci",
       "section": "CI",
       "hidden": true
+    },
+    {
+      "type": "build",
+      "section": "Build",
+      "hidden": true
     }
   ]
 }
