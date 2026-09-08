@@ -35,3 +35,13 @@ are Node code rather than library code meant to run anywhere.
 
 Only `tsconfig.base.json` and `tsconfig.node.json` (see the `files` field in
 `package.json`). Add a new preset by creating the file and listing it there.
+
+## Installing outside this workspace
+
+Not published to a registry. Pin to a released tag of this repo instead:
+
+```sh
+pnpm add -D "github:lagetech-dev/tooling#packages/ts-config-v0.1.0&path:/packages/ts-config"
+```
+
+See [releases](https://github.com/lagetech-dev/tooling/releases) for available tags.

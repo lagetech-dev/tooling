@@ -54,3 +54,13 @@ is either unlinted or produces a parser error, not a silently weaker check.
 ## Files ignored by default
 
 `dist/**` and `.turbo/**`, in both `createBaseConfig` and `createNodeConfig`.
+
+## Installing outside this workspace
+
+Not published to a registry. Pin to a released tag of this repo instead:
+
+```sh
+pnpm add -D "github:lagetech-dev/tooling#packages/eslint-config-v0.1.0&path:/packages/eslint-config"
+```
+
+See [releases](https://github.com/lagetech-dev/tooling/releases) for available tags.
