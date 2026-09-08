@@ -5,13 +5,11 @@
   "packages": {
     "packages/ts-config": {
       "package-name": "@lagetech/ts-config",
-      "changelog-path": "CHANGELOG.md",
-      "release-as": "0.1.0"
+      "changelog-path": "CHANGELOG.md"
     },
     "packages/eslint-config": {
       "package-name": "@lagetech/eslint-config",
-      "changelog-path": "CHANGELOG.md",
-      "release-as": "0.1.0"
+      "changelog-path": "CHANGELOG.md"
     }
   },
   "changelog-sections": [
