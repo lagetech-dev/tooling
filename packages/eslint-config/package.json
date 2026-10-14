@@ -1,10 +1,22 @@
 {
   "name": "@lagetech/eslint-config",
   "version": "1.0.0",
-  "private": true,
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "homepage": "https://github.com/lagetech-dev/tooling/tree/main/packages/eslint-config#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lagetech-dev/tooling.git",
+    "directory": "packages/eslint-config"
+  },
   "type": "module",
+  "files": [
+    "src"
+  ],
   "exports": {
     ".": "./src/index.ts"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
@@ -18,14 +30,19 @@
     "eslint-plugin-n": "^18.0.1",
     "eslint-plugin-prettier": "^5.5.5",
     "globals": "^17.6.0",
-    "jiti": "^2.7.0",
     "prettier": "^3.8.3",
     "typescript-eslint": "^8.59.4"
+  },
+  "peerDependencies": {
+    "eslint": "^10.0.0",
+    "jiti": "^2.0.0",
+    "typescript": "^6.0.0"
   },
   "devDependencies": {
     "@lagetech/ts-config": "workspace:*",
     "@types/node": "catalog:",
     "eslint": "catalog:linting",
+    "jiti": "^2.7.0",
     "typescript": "catalog:"
   }
 }

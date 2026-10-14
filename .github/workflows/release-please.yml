@@ -6,21 +6,61 @@ on:
     types: [completed]
     branches: [main]
 
-permissions:
-  contents: write
-  pull-requests: write
+permissions: {}
 
 jobs:
   release-please:
     if: github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
+      paths_released: ${{ steps.release.outputs.paths_released }}
     steps:
-      # github.token, not a PAT -- nothing here depends on a `release: published`
-      # event crossing repo boundaries, so the default token's limits don't bite.
+      # github.token, not a PAT -- publishing happens in this workflow's `publish` job, so
+      # nothing depends on a `release: published` event the default token can't trigger.
       - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
         id: release
         with:
           token: ${{ github.token }}
           config-file: .release-please/config.json
           manifest-file: .release-please/manifest.json
+
+  publish:
+    needs: release-please
+    if: needs.release-please.outputs.releases_created == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      # npm trusted publishing (OIDC): no NPM_TOKEN, provenance attached automatically.
+      id-token: write
+    strategy:
+      fail-fast: false
+      matrix:
+        path: ${{ fromJSON(needs.release-please.outputs.paths_released) }}
+    name: publish ${{ matrix.path }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          # The commit CI passed on, which release-please just tagged.
+          ref: ${{ github.event.workflow_run.head_sha }}
+      - uses: ./.github/actions/setup
+      # npm only packs a LICENSE from the package's own directory. The runner is thrown
+      # away afterwards, so the copy needs no cleanup.
+      - name: Copy license
+        run: cp LICENSE "$PKG_PATH/"
+        env:
+          PKG_PATH: ${{ matrix.path }}
+      # pnpm packs (resolving catalog:/workspace: specifiers), npm publishes -- npm's CLI
+      # is what speaks trusted publishing.
+      - name: Pack
+        run: pnpm --dir "$PKG_PATH" pack --pack-destination "$RUNNER_TEMP/pack"
+        env:
+          PKG_PATH: ${{ matrix.path }}
+      - name: Publish
+        run: npm publish "$RUNNER_TEMP"/pack/*.tgz
