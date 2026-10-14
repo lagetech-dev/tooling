@@ -55,12 +55,16 @@ is either unlinted or produces a parser error, not a silently weaker check.
 
 `dist/**` and `.turbo/**`, in both `createBaseConfig` and `createNodeConfig`.
 
-## Installing outside this workspace
-
-Not published to a registry. Pin to a released tag of this repo instead:
+## Installing
 
 ```sh
-pnpm add -D "github:lagetech-dev/tooling#eslint-config-v1.0.0&path:/packages/eslint-config"
+pnpm add -D @lagetech/eslint-config eslint jiti
 ```
 
-See [releases](https://github.com/lagetech-dev/tooling/releases) for available tags.
+The package ships TypeScript source, not compiled JS. It loads through the consumer's
+`eslint.config.ts`, which ESLint transpiles with `jiti`. Node's native type stripping won't
+work here: it refuses `.ts` files inside `node_modules`.
+
+## License
+
+[PolyForm Noncommercial 1.0.0](https://github.com/lagetech-dev/tooling/blob/main/LICENSE). Commercial use is not permitted.
