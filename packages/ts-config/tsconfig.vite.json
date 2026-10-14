@@ -16,8 +16,6 @@
     "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "types": ["vite/client"],
-    "noEmit": true,
-    "isolatedModules": true,
-    "verbatimModuleSyntax": true
+    "noEmit": true
   }
 }

@@ -42,6 +42,13 @@ export function createBaseConfig({ tsconfigRootDir }: ConfigOptions) {
             ignoreRestSiblings: true,
           },
         ],
+        curly: ['warn', 'all'],
+        'no-else-return': ['warn', { allowElseIf: false }],
+        'prefer-template': 'warn',
+        'no-useless-catch': 'warn',
+        'no-case-declarations': 'error',
+        '@typescript-eslint/no-unnecessary-condition': 'warn',
+        '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'warn',
       },
     },
   ]);
