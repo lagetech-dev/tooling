@@ -1,7 +1,13 @@
 {
   "name": "@lagetech/ts-config",
   "version": "1.0.0",
-  "private": true,
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "homepage": "https://github.com/lagetech-dev/tooling/tree/main/packages/ts-config#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lagetech-dev/tooling.git",
+    "directory": "packages/ts-config"
+  },
   "type": "module",
   "files": [
     "tsconfig.base.json",
@@ -16,5 +22,8 @@
       "import": "./tsconfig.node.json",
       "require": "./tsconfig.node.json"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
