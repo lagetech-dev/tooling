@@ -8,6 +8,7 @@ Shared build tooling for lagetech projects.
 | --- | --- |
 | [`packages/ts-config`](packages/ts-config) | Shared TypeScript compiler config |
 | [`packages/eslint-config`](packages/eslint-config) | Shared ESLint flat config |
+| [`packages/eslint-config-react`](packages/eslint-config-react) | ESLint flat config for React apps, built on `eslint-config` |
 
 ## Requirements
 

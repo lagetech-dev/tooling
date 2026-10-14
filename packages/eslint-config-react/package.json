@@ -1,0 +1,45 @@
+{
+  "name": "@lagetech/eslint-config-react",
+  "version": "0.0.0",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "homepage": "https://github.com/lagetech-dev/tooling/tree/main/packages/eslint-config-react#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lagetech-dev/tooling.git",
+    "directory": "packages/eslint-config-react"
+  },
+  "type": "module",
+  "files": [
+    "src"
+  ],
+  "exports": {
+    ".": "./src/react.ts"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "typecheck:watch": "tsc --noEmit --watch --preserveWatchOutput",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@lagetech/eslint-config": "workspace:^",
+    "eslint-plugin-jsx-a11y-x": "^0.2.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.6.0"
+  },
+  "peerDependencies": {
+    "eslint": "^10.0.0",
+    "jiti": "^2.0.0",
+    "typescript": "^6.0.0"
+  },
+  "devDependencies": {
+    "@lagetech/ts-config": "workspace:*",
+    "@types/node": "catalog:",
+    "eslint": "catalog:linting",
+    "jiti": "^2.7.0",
+    "typescript": "catalog:"
+  }
+}

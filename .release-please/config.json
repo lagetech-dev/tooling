@@ -10,8 +10,15 @@
     "packages/eslint-config": {
       "package-name": "@lagetech/eslint-config",
       "changelog-path": "CHANGELOG.md"
+    },
+    "packages/eslint-config-react": {
+      "package-name": "@lagetech/eslint-config-react",
+      "changelog-path": "CHANGELOG.md"
     }
   },
+  "plugins": [
+    "node-workspace"
+  ],
   "changelog-sections": [
     {
       "type": "feat",
