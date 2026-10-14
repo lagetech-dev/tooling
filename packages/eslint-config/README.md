@@ -5,23 +5,25 @@ type-checked rules.
 
 ## Usage
 
+Each environment has its own entry point, so runtime-agnostic code never loads
+`eslint-plugin-n`. There is no root entry point. For React apps, use
+[`@lagetech/eslint-config-react`](https://github.com/lagetech-dev/tooling/tree/main/packages/eslint-config-react), which builds on `/base`.
+
+| Entry point | Factory | For |
+| --- | --- | --- |
+| `@lagetech/eslint-config/node` | `createNodeConfig` | Code that runs under Node (`node:*` imports, Node globals) |
+| `@lagetech/eslint-config/base` | `createBaseConfig` | Runtime-agnostic code; also what `/node` and `@lagetech/eslint-config-react` build on |
+
 In a package's `eslint.config.ts`:
 
 ```ts
-import { createNodeConfig } from '@lagetech/eslint-config';
+import { createNodeConfig } from '@lagetech/eslint-config/node';
 
 export default createNodeConfig({ tsconfigRootDir: import.meta.dirname });
 ```
 
-For code that isn't Node-specific (no `node:*` imports, no Node globals), use
-`createBaseConfig` instead. It skips the Node globals, the `eslint-plugin-n` rules, and the
-naming-convention rules described below.
-
-```ts
-import { createBaseConfig } from '@lagetech/eslint-config';
-
-export default createBaseConfig({ tsconfigRootDir: import.meta.dirname });
-```
+Swap in `createBaseConfig` from `/base` for code that isn't Node-specific.
+`ConfigOptions`, the options type, is exported from `/base`.
 
 `tsconfigRootDir` has to point at a directory whose `tsconfig.json` includes every file being
 linted. Type-checked rules use it to build the project service; a file outside that project
@@ -37,6 +39,11 @@ is either unlinted or produces a parser error, not a silently weaker check.
 - `@typescript-eslint/no-unused-vars` as a warning rather than the default error, with a
   leading-underscore escape hatch (`_foo`) for args, caught errors, destructured array
   entries, and variables.
+- Rules beyond the recommended sets. Error: `no-case-declarations`. Warnings: `curly`
+  (`all`), `no-else-return` (`allowElseIf: false`, so an `else if` after a `return` is flagged
+  too), `prefer-template`, `no-useless-catch`, `@typescript-eslint/no-unnecessary-condition`,
+  `@typescript-eslint/no-unnecessary-boolean-literal-compare`. `require-await` comes from
+  `recommendedTypeChecked`'s `@typescript-eslint/require-await` (error), not the core rule.
 
 `createNodeConfig` adds on top of that:
 
@@ -53,7 +60,7 @@ is either unlinted or produces a parser error, not a silently weaker check.
 
 ## Files ignored by default
 
-`dist/**` and `.turbo/**`, in both `createBaseConfig` and `createNodeConfig`.
+`dist/**` and `.turbo/**`, in both factories.
 
 ## Installing
 

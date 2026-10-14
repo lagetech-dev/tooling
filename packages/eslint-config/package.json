@@ -13,7 +13,8 @@
     "src"
   ],
   "exports": {
-    ".": "./src/index.ts"
+    "./base": "./src/base.ts",
+    "./node": "./src/node.ts"
   },
   "publishConfig": {
     "access": "public"
@@ -29,7 +30,7 @@
     "eslint-plugin-import-x": "^4.16.2",
     "eslint-plugin-n": "^18.0.1",
     "eslint-plugin-prettier": "^5.5.5",
-    "globals": "^17.6.0",
+    "globals": "catalog:",
     "prettier": "^3.8.3",
     "typescript-eslint": "^8.59.4"
   },
@@ -42,7 +43,7 @@
     "@lagetech/ts-config": "workspace:*",
     "@types/node": "catalog:",
     "eslint": "catalog:linting",
-    "jiti": "^2.7.0",
+    "jiti": "catalog:linting",
     "typescript": "catalog:"
   }
 }
