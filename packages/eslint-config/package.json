@@ -13,7 +13,8 @@
     "src"
   ],
   "exports": {
-    ".": "./src/index.ts"
+    "./base": "./src/base.ts",
+    "./node": "./src/node.ts"
   },
   "publishConfig": {
     "access": "public"
