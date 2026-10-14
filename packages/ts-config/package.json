@@ -11,7 +11,8 @@
   "type": "module",
   "files": [
     "tsconfig.base.json",
-    "tsconfig.node.json"
+    "tsconfig.node.json",
+    "tsconfig.vite.json"
   ],
   "exports": {
     "./tsconfig.base.json": {
@@ -21,6 +22,10 @@
     "./tsconfig.node.json": {
       "import": "./tsconfig.node.json",
       "require": "./tsconfig.node.json"
+    },
+    "./tsconfig.vite.json": {
+      "import": "./tsconfig.vite.json",
+      "require": "./tsconfig.vite.json"
     }
   },
   "publishConfig": {
