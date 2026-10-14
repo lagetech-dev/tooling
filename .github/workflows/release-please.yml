@@ -50,14 +50,9 @@ jobs:
           # The commit CI passed on, which release-please just tagged.
           ref: ${{ github.event.workflow_run.head_sha }}
       - uses: ./.github/actions/setup
-      # npm only packs a LICENSE from the package's own directory. The runner is thrown
-      # away afterwards, so the copy needs no cleanup.
-      - name: Copy license
-        run: cp LICENSE "$PKG_PATH/"
-        env:
-          PKG_PATH: ${{ matrix.path }}
-      # pnpm packs (resolving catalog:/workspace: specifiers), npm publishes -- npm's CLI
-      # is what speaks trusted publishing.
+      # pnpm packs (resolving catalog:/workspace: specifiers, and including the workspace
+      # root's LICENSE when the package has none), npm publishes -- npm's CLI is what speaks
+      # trusted publishing.
       - name: Pack
         run: pnpm --dir "$PKG_PATH" pack --pack-destination "$RUNNER_TEMP/pack"
         env:
