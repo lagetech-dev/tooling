@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.0.0](https://github.com/lagetech-dev/tooling/compare/eslint-config-v2.0.0...eslint-config-v3.0.0) (2026-11-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* **eslint-config:** code that uses non-null assertions now fails lint.
+* **eslint-config:** code that uses type assertions other than `as const` now fails lint.
+
+### Features
+
+* **eslint-config:** ban non-null assertions ([a8e0ac2](https://github.com/lagetech-dev/tooling/commit/a8e0ac25fa048fc8d530329ced37fbcd99941531))
+* **eslint-config:** ban type assertions ([f0a3cfe](https://github.com/lagetech-dev/tooling/commit/f0a3cfed4b59ebbbfc95970aba23fe3c66628fdc))
+
 ## [2.0.0](https://github.com/lagetech-dev/tooling/compare/eslint-config-v1.1.0...eslint-config-v2.0.0) (2026-10-14)
 
 
