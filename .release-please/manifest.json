@@ -1,5 +1,5 @@
 {
   "packages/ts-config": "2.0.0",
-  "packages/eslint-config": "2.0.0",
-  "packages/eslint-config-react": "1.0.0"
+  "packages/eslint-config": "3.0.0",
+  "packages/eslint-config-react": "2.0.0"
 }
