@@ -49,6 +49,7 @@ export function createBaseConfig({ tsconfigRootDir }: ConfigOptions) {
         'no-case-declarations': 'error',
         '@typescript-eslint/no-unnecessary-condition': 'warn',
         '@typescript-eslint/no-unnecessary-boolean-literal-compare': 'warn',
+        '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }],
       },
     },
   ]);
