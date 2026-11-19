@@ -39,7 +39,10 @@ is either unlinted or produces a parser error, not a silently weaker check.
 - `@typescript-eslint/no-unused-vars` as a warning rather than the default error, with a
   leading-underscore escape hatch (`_foo`) for args, caught errors, destructured array
   entries, and variables.
-- Rules beyond the recommended sets. Error: `no-case-declarations`. Warnings: `curly`
+- Rules beyond the recommended sets. Errors: `no-case-declarations`,
+  `@typescript-eslint/consistent-type-assertions` (`assertionStyle: 'never'`, so `x as T` and
+  `<T>x` are banned; `as const` is still allowed), `@typescript-eslint/no-non-null-assertion`
+  (bans `x!`). Warnings: `curly`
   (`all`), `no-else-return` (`allowElseIf: false`, so an `else if` after a `return` is flagged
   too), `prefer-template`, `no-useless-catch`, `@typescript-eslint/no-unnecessary-condition`,
   `@typescript-eslint/no-unnecessary-boolean-literal-compare`. `require-await` comes from

@@ -6,6 +6,19 @@ import type { Linter } from 'eslint';
 import { createBaseConfig, type ConfigOptions } from '@lagetech/eslint-config/base';
 
 /**
+ * eslint-plugin-react types `configs.flat` as `Record<string, ReactFlatConfig>`, so under
+ * `noUncheckedIndexedAccess` every lookup is `| undefined`. Narrow at runtime instead of
+ * asserting, so a renamed config fails loudly rather than silently dropping out.
+ */
+function reactFlatConfig(name: string) {
+  const config = react.configs.flat[name];
+  if (config === undefined) {
+    throw new Error(`eslint-plugin-react has no flat config named "${name}"`);
+  }
+  return config;
+}
+
+/**
  * React variant for browser apps (Vite, TanStack). Builds on `createBaseConfig` (NOT
  * `createNodeConfig`): React components are PascalCase and hooks are camelCase, so the Node
  * factory's snake_case naming-convention rule would fight React idioms, and the browser has
@@ -14,21 +27,15 @@ import { createBaseConfig, type ConfigOptions } from '@lagetech/eslint-config/ba
  * prettier base.
  */
 export function createReactConfig(options: ConfigOptions): Linter.Config[] {
-  /**
-   * Returns a plain `Linter.Config[]` rather than wrapping in `defineConfig`:
-   * eslint-plugin-react's flat configs do not ship types that satisfy typescript-eslint's
-   * strict `ConfigWithExtends` parameter, so they (and the typescript-eslint base) are
-   * asserted to `Linter.Config` (a compile-time-only cast; the runtime objects are unchanged).
-   */
   return [
-    ...(createBaseConfig(options) as unknown as Linter.Config[]),
+    ...createBaseConfig(options),
     {
       languageOptions: {
         globals: globals.browser,
       },
     },
-    react.configs.flat.recommended as unknown as Linter.Config,
-    react.configs.flat['jsx-runtime'] as unknown as Linter.Config,
+    reactFlatConfig('recommended'),
+    reactFlatConfig('jsx-runtime'),
     reactHooks.configs.flat.recommended,
     jsxA11yX.configs.recommended,
     {
